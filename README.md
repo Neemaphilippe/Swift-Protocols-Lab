@@ -23,8 +23,50 @@ a. Create a `Human` class with two properties:
 
 Then create an initializer for the class and create two `Human` instances.
 
+```class Human {
+    var name : String
+    var age: Int
+    init(name: String, age: Int){
+    self.name = name
+    self.age = age
+    }
+}
+```
 b. Make the `Human` class adopt the CustomStringConvertible protocol. Then print both of your previously initialized
 `Human` objects.
+
+```class Human: People  {
+
+    var firstName: String {
+        get  {
+            return "Neema"
+        }
+    }
+
+    var lastName: String
+    var description: String
+    var name : String
+    var age: Int
+
+    init(name: String, age: Int, description: String, lastName: String){
+        self.name = name
+        self.age = age
+        self.description = description
+        self.lastName = lastName
+    }
+}
+
+
+protocol People  : CustomStringConvertible {
+    var firstName : String { get }
+
+}
+
+
+let person1 = Human.init(name: "Neema", age: 25, description: "great", lastName: "Philippe")
+print(person1)
+
+```
 
 c. Make the `Human` class adopt the Equatable protocol. Two instances of `Human` should be considered equal
 if their names and ages are identical to one another. Print the result of a boolean expression
@@ -46,11 +88,22 @@ Create a new array called sortedPeople of type [`Human`] that is the people arra
 a. Create a protocol called `Vehicle` with two requirements:
 - a nonsettable `numberOfWheels` property of type Int,
 - a function called drive().
+```
+protocol Vehicle {
+var numberOfWheels: Int {get}
+func drive()
+}
+```
 
 b. Define a `Car` struct that implements the `Vehicle` protocol. `numberOfWheels` should return a value of 4,
 and drive() should print "Vroom, vroom!" Create an instance of `Car`, print its number of wheels,
 then call drive().
-
+```
+func drive() {
+    print("Vroom, vroom!")
+    }
+}
+```
 c. Define a Bike struct that implements the `Vehicle` protocol. `numberOfWheels` should return a value of 2,
 and drive() should print "Begin pedaling!". Create an instance of Bike, print its number of wheels,
 then call drive().
@@ -79,9 +132,25 @@ protocol Flyable {
 ## Question 4
 
 a. Create a protocol called `Transformation`.  The protocol should specify a mutating method called transform
-
+```
+protocol Transformation {
+mutating func transform() 
+}
+```
 b. Make an enum called `SuperHero` that conforms to `Transformation` with cases `notHulk` and `hulk`
+```
+protocol Transformation {
+mutating func transform()
+}
 
+enum SuperHero: Transformation {
+    case notHulk
+    case Hulk
+
+func transform() {
+    }
+}
+```
 c. Create an instance of it named `bruceBanner`. Make it so that when the transform function is called that bruceBanner turns from
 `.notHulk` to `.hulk.``
 
@@ -116,7 +185,34 @@ e. `message` should return a unique message for each animal when talk is called.
 f. Put an instance of each of your classes in an array.
 
 g. Iterate over the array and have them print their `message` property
-
+```
+protocol Communication {
+    var message: String {get}
+}
+class Dog: Communication {
+    var message: String { return "woof"}
+    var hasFur = true
+}
+class Cat:Communication{
+    var message: String { return "meow"}
+    var shitsInSand = true
+}
+class Cow: Communication {
+    var message: String { return "moo"}
+    var makesMilk = true
+}
+let b = Cow()
+let c = Cat()
+let d = Dog()
+let array: [Communication] = [b,c,d]
+for a in array{
+    print(a.message)
+    if let newA = a as? Cow {
+        print (newA)
+        print ("it's a cow, holy cow")
+    }
+}
+```
 
 ## Question 6
 
